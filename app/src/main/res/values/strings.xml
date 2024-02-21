@@ -13,6 +13,19 @@
     <string name="son">Con trai</string>
     <string name="father">Cha</string>
     <string name="mother">Mẹ</string>
+    <string name="howareyou">Hôm nay bạn cảm thấy thế nào?</string>
+    <string name="happy">Vui vẻ</string>
+    <string name="angry">Tức giận</string>
+    <string name="excited">Hào hứng</string>
+    <string name="sad">Buồn bã</string>
+    <string name="normal">Bình thường</string>
+    <string name="whatdoyoudonow">Trong ngày qua, bạn đã...?</string>
+    <string name="condolence">Rất tiếc! Bạn đã rút khỏi tài khoản</string>
+    <string name="congratulation">Chúc mừng! Bạn đã nạp vào tài khoản</string>
+    <string name="balancefluctuation">Biến động số dư</string>
+    <string name="currentbalance">Số dư hiện tại</string>
+    <string name="setting">Cài đặt</string>
+
 
 
 </resources>

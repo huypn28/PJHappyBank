@@ -35,7 +35,7 @@
         android:layout_width="300dp"
         android:layout_height="600dp"
         android:orientation="vertical"
-        android:background="@drawable/whitebackground"
+        android:background="@drawable/yellow_circle_background"
         >
         <TextView
             android:layout_width="wrap_content"
@@ -57,7 +57,7 @@
             android:layout_height="wrap_content"
             android:text="Trần Văn A"
             android:fontFamily="@font/poppins_light"
-            android:background="@drawable/greybackground"
+            android:background="@drawable/grey_background"
             android:inputType="textPersonName"
             ></EditText>
 
@@ -80,7 +80,7 @@
             android:layout_height="wrap_content"
             android:text="abc@gmail.com"
             android:fontFamily="@font/poppins_light"
-            android:background="@drawable/greybackground"
+            android:background="@drawable/grey_background"
             android:inputType="textEmailAddress"
             ></EditText>
 
@@ -104,7 +104,7 @@
             android:layout_height="wrap_content"
             android:text="abc@gmail.com"
             android:fontFamily="@font/poppins_light"
-            android:background="@drawable/greybackground"
+            android:background="@drawable/grey_background"
             ></EditText>
 
         <TextView

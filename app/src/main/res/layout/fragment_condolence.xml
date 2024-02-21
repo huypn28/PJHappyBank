@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/nen6">
+<TextView
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:layout_width="220dp"
+    android:layout_height="150dp"
+    android:text="@string/condolence"
+    android:textSize="30sp"
+    android:fontFamily="@font/alata"
+    android:textColor="@color/black"
+    android:textStyle="bold"
+    android:layout_marginTop="520dp"
+    ></TextView>
+    <TableRow
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <ImageView
+            android:gravity="center"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:padding="4dp"
+            android:src="@drawable/heart"
+            ></ImageView>
+        <TextView
+            android:gravity="center"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:text="200"
+            android:textColor="@color/black"
+            android:textSize="45sp"
+            android:padding="4dp"
+            android:textStyle="bold"
+            ></TextView>
+    </TableRow>
+</LinearLayout>
