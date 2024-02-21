@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#f1f1f1"
     android:orientation="vertical">
     <TextView
@@ -56,6 +57,10 @@
 </LinearLayout>
 
     <TextView
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/setting"
@@ -64,4 +69,73 @@
         android:textColor="@color/black"
         android:fontFamily="@font/alata"
         ></TextView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:gravity="center"
+        >
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_marginStart="20dp"
+                android:layout_gravity="center"
+                android:layout_height="30dp"
+                android:layout_width="30dp"
+                android:src="@drawable/ic_key"></ImageView>
+            <TextView
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:text="Đổi mật khẩu"
+                android:layout_marginStart="20dp"
+                android:padding="4dp"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/alata"
+                android:textStyle="bold"
+                ></TextView>
+            <ImageView
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:src="@drawable/ic_right"
+                app:tint="@color/black"
+                ></ImageView>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_marginStart="20dp"
+                android:layout_gravity="center"
+                android:layout_height="30dp"
+                android:layout_width="30dp"
+                android:src="@drawable/ic_logout"
+                ></ImageView>
+            <TextView
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:text="Đăng xuất"
+                android:layout_marginStart="20dp"
+                android:padding="4dp"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/alata"
+                android:textStyle="bold"
+                ></TextView>
+            <ImageView
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:src="@drawable/ic_right"
+                app:tint="@color/black"
+                ></ImageView>
+
+        </TableRow>
+
+    </LinearLayout>
 </LinearLayout>
