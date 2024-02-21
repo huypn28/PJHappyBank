@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">PJHappyBank</string>
+    <string name="text_happy">Cùng nhau xây dựng gia đình hạnh phúc!</string>
+    <string name="login">Đăng nhập</string>
+    <string name="register">Đăng ký</string>
+    <string name="username">TÊN NGƯỜI DÙNG</string>
+    <string name="password">MẬT KHẨU</string>
+    <string name="email">Email</string>
+    <string name="forgetpassword">Quên mật khẩu?</string>
+    <string name="donthaveanaccount">Chưa có tài khoản</string>
+    <string name="haveanaccount">Đã có tài khoản? Đăng nhập</string>
+    <string name="daughter">Con gái</string>
+    <string name="son">Con trai</string>
+    <string name="father">Cha</string>
+    <string name="mother">Mẹ</string>
+
+
+</resources>
