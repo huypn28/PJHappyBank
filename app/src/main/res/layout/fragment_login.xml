@@ -21,7 +21,7 @@
         android:layout_width="300dp"
         android:layout_height="600dp"
         android:orientation="vertical"
-        android:background="@drawable/yellow_circle_background"
+        android:background="@drawable/white_background"
         >
         <TextView
             android:layout_width="wrap_content"
@@ -40,7 +40,7 @@
             android:padding="10dp"
             android:paddingStart="20dp"
             android:layout_height="wrap_content"
-            android:text="abc@gmail.com"
+            android:hint="abc@gmail.com"
             android:fontFamily="@font/poppins_light"
             android:background="@drawable/grey_background"
             android:inputType="textEmailAddress"
@@ -64,7 +64,7 @@
             android:paddingStart="20dp"
             android:inputType="textPassword"
             android:layout_height="wrap_content"
-            android:text="abc@gmail.com"
+            android:hint="*********"
             android:fontFamily="@font/poppins_light"
             android:background="@drawable/grey_background"
             ></EditText>

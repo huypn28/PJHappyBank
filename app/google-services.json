@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "687761338206",
+    "project_id": "pjhappybank",
+    "storage_bucket": "pjhappybank.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:687761338206:android:7529018172efe7519da9cf",
+        "android_client_info": {
+          "package_name": "com.example.pjhappybank"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDcpppcCqwO0Q-xzYu3w4uSoaDOC8sTEo8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
