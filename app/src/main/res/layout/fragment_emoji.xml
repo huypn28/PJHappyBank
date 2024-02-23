@@ -25,6 +25,7 @@
         >
 
         <ImageView
+            android:id="@+id/happyEmoji_fragmentEmoji"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:padding="4dp"
@@ -32,6 +33,7 @@
             android:src="@drawable/happy"
             ></ImageView>
         <ImageView
+            android:id="@+id/excitedEmoji_fragmentEmoji"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:src="@drawable/excited"
@@ -74,6 +76,7 @@
         >
 
         <ImageView
+            android:id="@+id/normalEmoji_fragmentEmoji"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:padding="4dp"
@@ -107,6 +110,7 @@
         >
 
         <ImageView
+            android:id="@+id/sadEmoji_fragmentEmoji"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:padding="4dp"
@@ -114,6 +118,7 @@
             android:src="@drawable/sad"
             ></ImageView>
         <ImageView
+            android:id="@+id/angryEmoji_fragmentEmoji"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:src="@drawable/angry"
@@ -156,6 +161,7 @@
         >
 
         <ImageView
+            android:id="@+id/arrow_right_fragmentEmoji"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginTop="30dp"

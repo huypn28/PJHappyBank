@@ -1,5 +1,6 @@
 package com.example.pjhappybank.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
+
 import com.example.pjhappybank.R;
 import com.example.pjhappybank.ViewModel.LoginViewModel;
 
@@ -42,7 +44,7 @@ public class LoginFragment extends Fragment {
                 loginViewModel.loginUserWithEmailAndPassword(email, password, new LoginViewModel.OnLoginListener() {
                     @Override
                     public void onLoginSuccess() {
-                        switchToHomeFragment();
+                        switchToEmojiFragment();
                     }
 
                     @Override
@@ -70,10 +72,10 @@ public class LoginFragment extends Fragment {
         return view;
     }
 
-    private void switchToHomeFragment() {
+    private void switchToEmojiFragment() {
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container, new HomeFragment());
+        fragmentTransaction.replace(R.id.fragment_container, new EmojiFragment());
         fragmentTransaction.commit();
     }
 
@@ -83,4 +85,7 @@ public class LoginFragment extends Fragment {
         fragmentTransaction.replace(R.id.fragment_container, new RegisterFragment());
         fragmentTransaction.commit();
     }
+
+
+
 }

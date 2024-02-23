@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.pjhappybank.Fragment.HomeFragment;
 import com.example.pjhappybank.Fragment.SplashFragment;
 import com.example.pjhappybank.R;
 
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         showSplashFragment();
+
     }
 
     private void showSplashFragment() {
