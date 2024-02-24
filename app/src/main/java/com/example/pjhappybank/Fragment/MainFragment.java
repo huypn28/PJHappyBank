@@ -31,6 +31,7 @@ public class MainFragment extends Fragment {
         quantityHeartTextView = view.findViewById(R.id.quantity_heart_homeFragment);
         ImageView diaryImageView = view.findViewById(R.id.diary_fragment_main);
         ImageView balanceImageView = view.findViewById(R.id.balance_fragment_main);
+        ImageView familyFragment = view.findViewById(R.id.family_fragment_main);
 
 
         mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
@@ -65,6 +66,12 @@ public class MainFragment extends Fragment {
                     return false;
             }
         });
+        familyFragment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switchFamilyFragment();
+            }
+        });
         return view;
 
 
@@ -80,6 +87,13 @@ public class MainFragment extends Fragment {
         BalanceFragment balanceFragment = new BalanceFragment();
         FragmentTransaction fragmentTransaction = requireActivity().getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container, balanceFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
+    private void switchFamilyFragment() {
+        FamilyFragment familyFragment = new FamilyFragment();
+        FragmentTransaction fragmentTransaction = requireActivity().getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container, familyFragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
