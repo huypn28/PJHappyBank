@@ -29,6 +29,7 @@ public class MainFragment extends Fragment {
         usernameTextView = view.findViewById(R.id.username_homeFragment);
         quantityHeartTextView = view.findViewById(R.id.quantity_heart_homeFragment);
         ImageView diaryImageView = view.findViewById(R.id.diary_fragment_main);
+        ImageView balanceImageView = view.findViewById(R.id.balance_fragment_main);
 
 
         mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
@@ -46,6 +47,12 @@ public class MainFragment extends Fragment {
                 switchToEmojiFragment();
             }
         });
+        balanceImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switchToBalanceFragment();
+            }
+        });
         return view;
 
 
@@ -54,6 +61,13 @@ public class MainFragment extends Fragment {
         EmojiFragment emojiFragment = new EmojiFragment();
         FragmentTransaction fragmentTransaction = requireActivity().getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container, emojiFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
+    private void switchToBalanceFragment() {
+        BalanceFragment balanceFragment = new BalanceFragment();
+        FragmentTransaction fragmentTransaction = requireActivity().getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container, balanceFragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }

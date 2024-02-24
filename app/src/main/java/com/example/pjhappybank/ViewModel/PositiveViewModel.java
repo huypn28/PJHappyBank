@@ -28,22 +28,32 @@ public class PositiveViewModel extends ViewModel {
     }
 
     private void updateHeartAndDateInUserCollection(String userId, int totalQuantity, OnUpdateListener listener) {
+        String currentDate = new java.text.SimpleDateFormat("dd-MM-yyyy", java.util.Locale.ENGLISH).format(new Date());
+
         firestore.collection("users").document(userId)
                 .collection("heart")
-                .whereEqualTo("date", new java.text.SimpleDateFormat("dd-MM-yyyy", java.util.Locale.ENGLISH).format(new Date()))
+                .whereEqualTo("date", currentDate)
                 .limit(1)
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful() && task.getResult() != null) {
                         QuerySnapshot querySnapshot = task.getResult();
+                        DocumentSnapshot documentSnapshot = querySnapshot.getDocuments().get(0);
+                        int currentQuantity = Integer.parseInt(documentSnapshot.getString("quantity"));
+                        int newQuantity = currentQuantity + totalQuantity;
                         if (!querySnapshot.isEmpty()) {
-                            DocumentSnapshot documentSnapshot = querySnapshot.getDocuments().get(0);
-
-                            int currentQuantity = Integer.parseInt(documentSnapshot.getString("quantity"));
-                            int newQuantity = currentQuantity + totalQuantity;
-
                             documentSnapshot.getReference().update("quantity", String.valueOf(newQuantity))
                                     .addOnSuccessListener(aVoid -> listener.onUpdateSuccess())
+                                    .addOnFailureListener(e -> listener.onUpdateFailure(e.getMessage()));
+                        } else {
+                            Map<String, Object> newData = new HashMap<>();
+                            newData.put("date", currentDate);
+                            newData.put("quantity", String.valueOf(newQuantity));
+
+                            firestore.collection("users").document(userId)
+                                    .collection("heart")
+                                    .add(newData)
+                                    .addOnSuccessListener(documentReference -> listener.onUpdateSuccess())
                                     .addOnFailureListener(e -> listener.onUpdateFailure(e.getMessage()));
                         }
                     }

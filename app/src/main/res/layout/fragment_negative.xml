@@ -19,8 +19,9 @@
         ></TextView>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcv_fragment_negative"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="500dp"
+        android:layout_gravity="center_horizontal"
         ></androidx.recyclerview.widget.RecyclerView>
     <TableRow
         android:gravity="end"

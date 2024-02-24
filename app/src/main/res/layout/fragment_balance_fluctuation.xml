@@ -50,6 +50,7 @@
                 android:src="@drawable/heart"
                 ></ImageView>
             <TextView
+                android:id="@+id/now_balance_fragment_balance"
                 android:gravity="center"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
@@ -79,11 +80,16 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Năm 2023"
+                android:text="Năm 2024"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 ></TextView>
         </TableRow>
     </LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcv_fragment_balance"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"></androidx.recyclerview.widget.RecyclerView>
 
 </LinearLayout>
