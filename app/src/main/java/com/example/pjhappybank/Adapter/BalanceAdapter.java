@@ -12,7 +12,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.pjhappybank.Model.Heart;
 import com.example.pjhappybank.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 public class BalanceAdapter extends RecyclerView.Adapter<BalanceAdapter.BalanceViewHolder> {
 
@@ -37,14 +40,35 @@ public class BalanceAdapter extends RecyclerView.Adapter<BalanceAdapter.BalanceV
     public void onBindViewHolder(@NonNull BalanceViewHolder holder, int position) {
         if (dataList != null && position < dataList.size()) {
             Heart data = dataList.get(position);
-            holder.dateTextView.setText(data.getDate());
-            holder.quantityTextView.setText(data.getQuantity());
-        }
+            // Check if the date is today
+            if (!isToday(data.getDate())) {
+                holder.dateTextView.setText(data.getDate());
+                holder.quantityTextView.setText(data.getQuantity());
 
-        if (quantityChangesList != null && position < quantityChangesList.size()) {
-            int quantityChange = quantityChangesList.get(position);
-            holder.changeTextView.setText(String.valueOf(quantityChange));
+                if (quantityChangesList != null && position < quantityChangesList.size()) {
+                    int quantityChange = quantityChangesList.get(position);
+                    holder.changeTextView.setText(String.valueOf(Math.abs(quantityChange))); // Use absolute value
+
+                    if (quantityChange < 0) {
+                        holder.changeTextView.setTextColor(context.getResources().getColor(R.color.red)); // Set red color for negative changes
+                        holder.changeTextView.setText("-" + holder.changeTextView.getText()); // Add '-' sign for negative changes
+                    } else {
+                        holder.changeTextView.setTextColor(context.getResources().getColor(R.color.green)); // Set green color for positive changes
+                        holder.changeTextView.setText("+" + holder.changeTextView.getText()); // Add '+' sign for positive changes
+                    }
+                }
+            } else {
+                // Hide the item for today
+                holder.itemView.setVisibility(View.GONE);
+                holder.itemView.setLayoutParams(new RecyclerView.LayoutParams(0, 0));
+            }
         }
+    }
+
+    private boolean isToday(String date) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+        String today = sdf.format(Calendar.getInstance().getTime());
+        return today.equals(date);
     }
 
     @Override

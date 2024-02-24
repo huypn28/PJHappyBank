@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.pjhappybank.R;
 import com.example.pjhappybank.ViewModel.MainViewModel;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainFragment extends Fragment {
 
@@ -53,6 +54,17 @@ public class MainFragment extends Fragment {
                 switchToBalanceFragment();
             }
         });
+        BottomNavigationView bottomNavigationView = view.findViewById(R.id.layout_bottom_bar);
+        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.menu_profile:
+                    switchToProfileFragment();
+                    return true;
+
+                default:
+                    return false;
+            }
+        });
         return view;
 
 
@@ -68,6 +80,13 @@ public class MainFragment extends Fragment {
         BalanceFragment balanceFragment = new BalanceFragment();
         FragmentTransaction fragmentTransaction = requireActivity().getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container, balanceFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
+    private void switchToProfileFragment() {
+        ProfileFragment profileFragment = new ProfileFragment();
+        FragmentTransaction fragmentTransaction = requireActivity().getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container, profileFragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
