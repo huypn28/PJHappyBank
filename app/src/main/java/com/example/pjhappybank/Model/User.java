@@ -5,11 +5,13 @@ public class User {
     private String id;
     private String name;
     private String emotion;
+    private String position;
 
-    public User(String id, String name, String emotion) {
+    public User(String id, String name, String emotion, String position, String position1) {
         this.id = id;
         this.name = name;
         this.emotion = emotion;
+        this.position = position1;
     }
 
     public String getId() {
@@ -34,5 +36,13 @@ public class User {
 
     public void setEmotion(String emotion) {
         this.emotion = emotion;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
     }
 }

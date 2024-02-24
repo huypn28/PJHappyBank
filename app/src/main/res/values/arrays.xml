@@ -1,0 +1,17 @@
+<resources>
+    <string-array name="positive_items">
+        <item>Quan tâm, hỏi han</item>
+        <item>Trò chuyện, tâm sự</item>
+        <item>Giúp đỡ gia đình</item>
+        <item>Cảm ơn và xin lỗi</item>
+        <item>Dành thời gian cho gia đình</item>
+    </string-array>
+
+    <string-array name="negative_items">
+        <item>Tranh cãi, cáu giận</item>
+        <item>Không quan tâm nhau</item>
+        <item>Làm gia đình buồn</item>
+        <item>Không chia sẻ </item>
+        <item>Không trung thực</item>
+    </string-array>
+</resources>

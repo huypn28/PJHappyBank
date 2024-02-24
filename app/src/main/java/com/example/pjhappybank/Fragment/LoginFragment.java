@@ -1,6 +1,5 @@
 package com.example.pjhappybank.Fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -44,7 +43,7 @@ public class LoginFragment extends Fragment {
                 loginViewModel.loginUserWithEmailAndPassword(email, password, new LoginViewModel.OnLoginListener() {
                     @Override
                     public void onLoginSuccess() {
-                        switchToEmojiFragment();
+                        checkUserPosition();
                     }
 
                     @Override
@@ -54,11 +53,10 @@ public class LoginFragment extends Fragment {
             }
         });
 
-        // Xử lý sự kiện khi người dùng nhấn quên mật khẩu
         forgetPasswordTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Xử lý khi người dùng nhấn vào quên mật khẩu, có thể chuyển hướng màn hình hoặc thực hiện các hành động khác
+                // Handle forget password click if needed
             }
         });
 
@@ -72,10 +70,36 @@ public class LoginFragment extends Fragment {
         return view;
     }
 
-    private void switchToEmojiFragment() {
+    private void checkUserPosition() {
+        String userId = loginViewModel.getCurrentUser().getUid();
+
+        loginViewModel.getUserPosition(userId, new LoginViewModel.OnGetPositionListener() {
+            @Override
+            public void onGetPositionSuccess(String position) {
+                if (position == null) {
+                    switchToSelectFragment();
+                } else {
+                    switchToMainFragment();
+                }
+            }
+
+            @Override
+            public void onGetPositionFailure(String errorMessage) {
+            }
+        });
+    }
+
+    private void switchToSelectFragment() {
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container, new EmojiFragment());
+        fragmentTransaction.replace(R.id.fragment_container, new SelectFragment());
+        fragmentTransaction.commit();
+    }
+
+    private void switchToMainFragment() {
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container, new MainFragment());
         fragmentTransaction.commit();
     }
 
@@ -85,7 +109,4 @@ public class LoginFragment extends Fragment {
         fragmentTransaction.replace(R.id.fragment_container, new RegisterFragment());
         fragmentTransaction.commit();
     }
-
-
-
 }

@@ -4,37 +4,63 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-
 
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
+import androidx.viewpager.widget.ViewPager;
 
+import com.example.pjhappybank.Adapter.HomePageAdapter;
 import com.example.pjhappybank.R;
-import com.example.pjhappybank.ViewModel.HomeViewModel;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class HomeFragment extends Fragment {
-
-    private TextView usernameTextView;
-    private TextView quantityHeartTextView;
-    private HomeViewModel homeViewModel;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        usernameTextView = view.findViewById(R.id.username_homeFragment);
-        quantityHeartTextView = view.findViewById(R.id.quantity_heart_homeFragment);
+        ViewPager viewPager = view.findViewById(R.id.viewPager);
+        BottomNavigationView bottomNavigationView = view.findViewById(R.id.layout_bottom_bar);
 
-        homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
+        HomePageAdapter adapter = new HomePageAdapter(getChildFragmentManager());
+        adapter.addFragment(new MainFragment());
+        adapter.addFragment(new ProfileFragment());
 
-        homeViewModel.loadUsername(username -> {
-            usernameTextView.setText(username);
+        viewPager.setAdapter(adapter);
+
+        // Set up ViewPager page change listener
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                switch (position) {
+                    case 0:
+                        bottomNavigationView.setSelectedItemId(R.id.menu_home);
+                        break;
+                    case 1:
+                        bottomNavigationView.setSelectedItemId(R.id.menu_profile);
+                        break;
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+            }
         });
 
-        homeViewModel.loadHeartData(heart -> {
-            quantityHeartTextView.setText(heart.getQuantity());
+        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.menu_home:
+                    viewPager.setCurrentItem(0, true);
+                    return true;
+                case R.id.menu_profile:
+                    viewPager.setCurrentItem(1, true);
+                    return true;
+                default:
+                    return false;
+            }
         });
 
         return view;

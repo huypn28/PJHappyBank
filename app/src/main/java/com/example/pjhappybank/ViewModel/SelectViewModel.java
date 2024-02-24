@@ -6,17 +6,16 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
-public class EmojiViewModel {
-
+public class SelectViewModel {
     private FirebaseAuth firebaseAuth;
     private FirebaseFirestore firestore;
 
-    public EmojiViewModel() {
+    public SelectViewModel() {
         firebaseAuth = FirebaseAuth.getInstance();
         firestore = FirebaseFirestore.getInstance();
     }
 
-    public void saveEmojiToFirestore(String emoji, OnEmojiSaveListener onEmojiSaveListener) {
+    public void savePositionToFirestore(String position, SelectViewModel.OnPositionSaveListener onPositionSaveListener) {
         String userId = firebaseAuth.getCurrentUser().getUid();
 
         firestore.collection("users").document(userId)
@@ -24,30 +23,28 @@ public class EmojiViewModel {
                 .addOnSuccessListener(documentSnapshot -> {
                     if (documentSnapshot.exists()) {
                         Map<String, Object> userUpdate = new HashMap<>();
-                        userUpdate.put("emotion", emoji);
+                        userUpdate.put("position", position);
 
                         firestore.collection("users").document(userId)
                                 .update(userUpdate)
                                 .addOnSuccessListener(aVoid -> {
-                                    onEmojiSaveListener.onEmojiSaveSuccess();
+                                    onPositionSaveListener.onPositionSaveSuccess();
                                 })
                                 .addOnFailureListener(e -> {
-                                    onEmojiSaveListener.onEmojiSaveFailure(e.getMessage());
+                                    onPositionSaveListener.onPositionSaveFailure(e.getMessage());
                                 });
                     } else {
-                        onEmojiSaveListener.onEmojiSaveFailure("User document not found");
+                        onPositionSaveListener.onPositionSaveFailure("User document not found");
                     }
                 })
                 .addOnFailureListener(e -> {
-                    onEmojiSaveListener.onEmojiSaveFailure(e.getMessage());
+                    onPositionSaveListener.onPositionSaveFailure(e.getMessage());
                 });
     }
 
-    public interface OnEmojiSaveListener {
-        void onEmojiSaveSuccess();
+    public interface OnPositionSaveListener {
+        void onPositionSaveSuccess();
 
-        void onEmojiSaveFailure(String errorMessage);
+        void onPositionSaveFailure(String errorMessage);
     }
 }
-
-

@@ -4,7 +4,24 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/nen6">
-<TextView
+    <TableRow
+        android:gravity="end"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="30dp"
+        >
+
+        <ImageView
+            android:id="@+id/next_fragment_condolence"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:padding="4dp"
+            android:background="@drawable/white_circle_background"
+            android:src="@drawable/ic_right"></ImageView>
+
+    </TableRow>
+    <TextView
     android:layout_gravity="center"
     android:gravity="center"
     android:layout_width="220dp"
@@ -14,7 +31,7 @@
     android:fontFamily="@font/alata"
     android:textColor="@color/black"
     android:textStyle="bold"
-    android:layout_marginTop="520dp"
+    android:layout_marginTop="400dp"
     ></TextView>
     <TableRow
         android:gravity="center"
@@ -30,6 +47,7 @@
             android:src="@drawable/heart"
             ></ImageView>
         <TextView
+            android:id="@+id/minus_heart_fragment_condolence"
             android:gravity="center"
             android:layout_width="100dp"
             android:layout_height="100dp"

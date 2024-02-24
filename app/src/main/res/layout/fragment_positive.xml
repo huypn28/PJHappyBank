@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#93c4f5"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/whatdoyoudonow"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        android:textSize="40dp"
+        android:gravity="center"
+        android:fontFamily="@font/muli"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        ></TextView>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcv_fragment_positive"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        ></androidx.recyclerview.widget.RecyclerView>
+    <TableRow
+        android:gravity="end"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        >
+
+        <ImageView
+            android:id="@+id/button_fragment_positive"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="30dp"
+            android:padding="4dp"
+            android:background="@drawable/white_circle_background"
+            android:src="@drawable/ic_right"
+            app:tint="#93c4f5"
+            ></ImageView>
+
+    </TableRow>
+</LinearLayout>

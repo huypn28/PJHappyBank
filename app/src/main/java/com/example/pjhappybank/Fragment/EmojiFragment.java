@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,7 +20,6 @@ public class EmojiFragment extends Fragment {
     private String selectedEmoji = "";
 
     public EmojiFragment() {
-        // Required empty public constructor
     }
 
     @Override
@@ -39,7 +39,6 @@ public class EmojiFragment extends Fragment {
         ImageView sadEmoji = view.findViewById(R.id.sadEmoji_fragmentEmoji);
         ImageView angryEmoji = view.findViewById(R.id.angryEmoji_fragmentEmoji);
 
-        // Set click listeners for emoji images
         happyEmoji.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,8 +78,12 @@ public class EmojiFragment extends Fragment {
         arrowImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveSelectedEmojiToFirestore();
-                switchToHomeFragment();
+                if (selectedEmoji.isEmpty()) {
+                    showEmojiSelectionPrompt();
+                } else {
+                    saveSelectedEmojiToFirestore();
+                    switchToPositiveFragment();
+                }
             }
         });
     }
@@ -94,23 +97,24 @@ public class EmojiFragment extends Fragment {
             emojiViewModel.saveEmojiToFirestore(selectedEmoji, new EmojiViewModel.OnEmojiSaveListener() {
                 @Override
                 public void onEmojiSaveSuccess() {
-                    // Handle success
                 }
 
                 @Override
                 public void onEmojiSaveFailure(String errorMessage) {
-                    // Handle failure
                 }
             });
         } else {
-            // Handle case when selectedEmoji is empty
         }
     }
 
-    private void switchToHomeFragment() {
-        HomeFragment homeFragment = new HomeFragment();
+    private void switchToPositiveFragment() {
+        PositiveFragment positiveFragment = new PositiveFragment();
         requireActivity().getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragment_container, homeFragment)
+                .replace(R.id.fragment_container, positiveFragment)
                 .commit();
+    }
+
+    private void showEmojiSelectionPrompt() {
+        Toast.makeText(requireContext(), "Mời chọn trạng thái của bạn", Toast.LENGTH_SHORT).show();
     }
 }

@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.pjhappybank.Fragment.HomeFragment;
 import com.example.pjhappybank.Fragment.SplashFragment;
 import com.example.pjhappybank.R;
 

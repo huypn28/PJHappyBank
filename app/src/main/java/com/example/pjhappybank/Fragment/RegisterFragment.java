@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.example.pjhappybank.R;
 import com.example.pjhappybank.ViewModel.RegisterViewModel;
 
@@ -44,16 +46,18 @@ public class RegisterFragment extends Fragment {
                 registerViewModel.registerUserWithEmailAndPassword(email, password, userName, new RegisterViewModel.OnRegisterListener() {
                     @Override
                     public void onRegisterSuccess() {
+                        Toast.makeText(v.getContext(), "Đã đăng kí thành công, vui lòng đăng nhập", Toast.LENGTH_SHORT).show();
+
                         switchToLoginFragment();
                     }
 
                     @Override
                     public void onRegisterFailure(String errorMessage) {
-                        // Xử lý khi đăng ký thất bại, hiển thị thông báo lỗi hoặc thực hiện các hành động khác
                     }
                 });
             }
         });
+
 
         haveAnAccountTextView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,7 +69,6 @@ public class RegisterFragment extends Fragment {
         return view;
     }
     private void switchToLoginFragment() {
-        // Chuyển sang loginFragment
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container, new LoginFragment());
