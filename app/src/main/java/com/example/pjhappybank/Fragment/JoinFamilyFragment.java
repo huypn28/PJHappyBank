@@ -7,10 +7,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.pjhappybank.Model.Family;
@@ -22,45 +25,42 @@ import com.google.firebase.auth.FirebaseAuth;
 import java.util.List;
 
 public class JoinFamilyFragment extends Fragment {
-    private TextView tvJoin;
-    private EditText tvCode;
-
     private JoinFamilyViewModel joinFamilyViewModel;
-    private FirebaseAuth firebaseAuth;
-
-    public JoinFamilyFragment() {
-    }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_join_family, container, false);
-        joinFamilyViewModel = new ViewModelProvider(this).get(JoinFamilyViewModel.class);
-        tvJoin = view.findViewById(R.id.tv_join);
-        tvCode = view.findViewById(R.id.tv_code_family);
-        firebaseAuth = FirebaseAuth.getInstance();
-        joinFamilyViewModel.getAllFamilyData();
-        List<Family> familyList = joinFamilyViewModel.getFamilyList();
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.fragment_join_family, container, false);
 
+        // Initialize ViewModel
+        joinFamilyViewModel = new ViewModelProvider(this).get(JoinFamilyViewModel.class);
+
+        // Find views
+        EditText etFamilyCode = rootView.findViewById(R.id.tv_code_family);
+        TextView tvJoin = rootView.findViewById(R.id.tv_join);
+
+        // Set onClickListener for the "Tham gia" button
         tvJoin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for (int i = 0; i < familyList.size(); i++) {
-                    if (familyList.get(i).getcode().equals(tvCode.getText().toString())) {
-                        joinFamilyViewModel.addFamilyData(firebaseAuth.getUid(), tvCode.getText().toString());
-                        getActivity().onBackPressed();
-                    }
-                }
+                String familyCode = etFamilyCode.getText().toString().trim();
 
+                if (!familyCode.isEmpty()) {
+                    joinFamilyViewModel.joinFamily(familyCode);
+                    navigateBackToFamilyFragment();
+                } else {
+                    Toast.makeText(getContext(), "Vui lòng nhập mã gia đình", Toast.LENGTH_SHORT).show();
+                }
             }
         });
-        return view;
+
+        return rootView;
     }
-
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
+    private void navigateBackToFamilyFragment() {
+        FragmentManager fragmentManager = getParentFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        FamilyFragment familyFragment = new FamilyFragment();
+        fragmentTransaction.replace(R.id.fragment_container, familyFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 }

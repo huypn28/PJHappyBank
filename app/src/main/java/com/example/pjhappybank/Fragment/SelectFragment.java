@@ -4,9 +4,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -42,28 +42,28 @@ public class SelectFragment extends Fragment {
         daughter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                handlePositionSelection("daughter");
+                handlePositionSelection(daughter, "daughter");
             }
         });
 
         son.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                handlePositionSelection("son");
+                handlePositionSelection(son, "son");
             }
         });
 
         mother.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                handlePositionSelection("mother");
+                handlePositionSelection(mother, "mother");
             }
         });
 
         father.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                handlePositionSelection("father");
+                handlePositionSelection(father, "father");
             }
         });
 
@@ -81,8 +81,27 @@ public class SelectFragment extends Fragment {
         });
     }
 
-    private void handlePositionSelection(String position) {
+    private void handlePositionSelection(ImageView imageView, String position) {
         selectedPosition = position;
+
+        // Reset background for all ImageViews
+        resetBackgrounds();
+
+        // Set background for the selected ImageView
+        imageView.setBackgroundResource(R.drawable.yellow_circle_background);
+    }
+
+    // Helper method to reset background for all ImageViews
+    private void resetBackgrounds() {
+        ImageView daughter = getView().findViewById(R.id.daughter_fragment_select_person);
+        ImageView son = getView().findViewById(R.id.son_fragment_select_person);
+        ImageView mother = getView().findViewById(R.id.mother_fragment_select_person);
+        ImageView father = getView().findViewById(R.id.father_fragment_select_person);
+
+        daughter.setBackgroundResource(0);
+        son.setBackgroundResource(0);
+        mother.setBackgroundResource(0);
+        father.setBackgroundResource(0);
     }
 
     private void saveSelectedPositionToFirestore() {
@@ -90,10 +109,12 @@ public class SelectFragment extends Fragment {
             selectViewModel.savePositionToFirestore(selectedPosition, new SelectViewModel.OnPositionSaveListener() {
                 @Override
                 public void onPositionSaveSuccess() {
+                    // Handle successful save
                 }
 
                 @Override
                 public void onPositionSaveFailure(String errorMessage) {
+                    // Handle save failure
                 }
             });
         } else {

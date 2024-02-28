@@ -20,58 +20,48 @@ public class JoinFamilyViewModel extends ViewModel {
     private FirebaseAuth firebaseAuth;
     private FirebaseFirestore firestore;
 
-    private List<Family> familyList;
-
-    public List<Family> getFamilyList() {
-        return familyList;
-    }
-
     public JoinFamilyViewModel() {
         firebaseAuth = FirebaseAuth.getInstance();
         firestore = FirebaseFirestore.getInstance();
-        familyList = new ArrayList<>();
     }
-    public void addFamilyData(String user, String code) {
-        // Tham chiếu đến collection "family" trong Firestore
-        CollectionReference familyRef = firestore.collection("relationship");
 
-        // Tạo một đối tượng FamilyModel để đại diện cho dữ liệu cần thêm vào
-        RelationShip relationShip = new RelationShip(user, code);
+    public void joinFamily(String familyCode) {
+        CollectionReference familyRef = firestore.collection("family");
 
-        // Thêm dữ liệu vào collection "family" trong Firestore
-        familyRef.add(relationShip)
-                .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+        familyRef.whereEqualTo("code", familyCode)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
-                    public void onComplete(Task<DocumentReference> task) {
+                    public void onComplete(Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
-                            // Dữ liệu đã được thêm thành công
+                            if (!task.getResult().isEmpty()) {
+                                String familyId = task.getResult().getDocuments().get(0).getId();
+
+                                updateFamilyCodeForUser(familyId, familyCode);
+                            } else {
+
+                            }
                         } else {
-                            // Xảy ra lỗi khi thêm dữ liệu
+
                         }
                     }
                 });
     }
 
-    // Phương thức lấy hết dữ liệu từ collection "family"
-    public void getAllFamilyData() {
-        CollectionReference familyRef = firestore.collection("family");
-        familyRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    for (DocumentSnapshot document : task.getResult()) {
-                        // Lấy dữ liệu từ mỗi document trong collection "family"
-                        Family familyMember = document.toObject(Family.class);
-                        if (familyMember != null) {
-                            // Xử lý dữ liệu, ví dụ: hiển thị thông tin, thêm vào danh sách, ...
-                            familyList.add(familyMember);
+    private void updateFamilyCodeForUser(String familyId, String code) {
+        String userId = firebaseAuth.getCurrentUser().getUid();
+
+        DocumentReference userRef = firestore.collection("users").document(userId);
+
+        userRef.update("familyCode", code)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(Task<Void> task) {
+                        if (task.isSuccessful()) {
+                        } else {
+
                         }
                     }
-                } else {
-                    // Xử lý lỗi nếu có
-
-                }
-            }
-        });
+                });
     }
 }

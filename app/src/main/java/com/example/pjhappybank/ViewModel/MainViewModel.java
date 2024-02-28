@@ -10,6 +10,10 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class MainViewModel extends ViewModel {
 
     private FirebaseAuth firebaseAuth;
@@ -46,7 +50,6 @@ public class MainViewModel extends ViewModel {
         }
     }
 
-    // Phương thức để lấy quantity và date từ Cloud Firestore và gán vào TextView
     public void loadHeartData(OnDataLoadedListener<Heart> listener) {
         FirebaseUser currentUser = firebaseAuth.getCurrentUser();
         if (currentUser != null) {
@@ -62,19 +65,34 @@ public class MainViewModel extends ViewModel {
                                 if (document.exists()) {
                                     String quantity = document.getString("quantity");
                                     String date = document.getString("date");
-                                    Heart heart = new Heart(quantity, date);
-                                    listener.onDataLoaded(heart);
+
+                                    // Kiểm tra nếu ngày trong document trùng với ngày hiện tại
+                                    if (date.equals(getCurrentDate())) {
+                                        Heart heart = new Heart(quantity, date);
+                                        listener.onDataLoaded(heart);
+                                        return; // Đã tìm thấy và gọi callback, thoát khỏi vòng lặp
+                                    }
                                 } else {
                                     Log.d("MainViewModel", "No such document");
                                 }
                             }
+                            // Nếu không tìm thấy dữ liệu cho ngày hiện tại, có thể thông báo hoặc xử lý tương ứng
+                            Log.d("MainViewModel", "No data found for today");
                         } else {
                             Log.d("MainViewModel", "get failed with ", task.getException());
                         }
                     });
         } else {
+            // Xử lý trường hợp currentUser là null
         }
     }
+    private String getCurrentDate() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        return sdf.format(new Date());
+    }
+
+
+
 
     public interface OnDataLoadedListener<T> {
         void onDataLoaded(T data);

@@ -3,9 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="30dp">
 
     <LinearLayout
+        android:padding="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/white_background"
@@ -13,23 +15,27 @@
         >
 
         <TableRow
+            android:layout_marginTop="5dp"
             android:layout_marginStart="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <ImageView
+                android:id="@+id/imageView_item_person"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:padding="4dp"
-                android:background="@drawable/daughter"></ImageView>
+                android:background="@drawable/yellow_circle_background"
+                ></ImageView>
             <LinearLayout
                 android:layout_width="250dp"
                 android:layout_height="80dp"
                 android:orientation="vertical"
-                android:layout_marginStart="30dp"
+                android:layout_marginStart="10dp"
                 >
 
                 <TextView
+                    android:id="@+id/position_item_person"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     android:text="Con gái"
@@ -41,6 +47,7 @@
                 </TextView>
 
                 <TextView
+                    android:id="@+id/name_item_person"
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"
                     android:text="Trần Văn A"
@@ -63,25 +70,27 @@
             android:orientation="horizontal"
             >
             <ImageView
+                android:id="@+id/emotion_item_person"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:padding="4dp"
-                android:layout_marginStart="10dp"
-                android:src="@drawable/happy"
+                android:layout_marginStart="30dp"
+
                 ></ImageView>
             <ImageView
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:padding="4dp"
-                android:layout_marginStart="110dp"
+                android:layout_marginStart="90dp"
                 android:src="@drawable/heart"
                 ></ImageView>
             <TextView
-                android:id="@+id/quantity_heart_homeFragment"
+                android:id="@+id/quantity_item_person"
                 android:gravity="center"
                 android:layout_width="100dp"
                 android:layout_height="70dp"
                 android:text="200"
+                android:textColor="@color/red"
                 android:textSize="45sp"
                 android:padding="4dp"
                 android:textStyle="bold"

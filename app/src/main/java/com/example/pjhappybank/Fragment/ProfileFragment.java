@@ -93,6 +93,7 @@ public class ProfileFragment extends Fragment {
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.menu_home:
+                    item.setChecked(true);
                     switchToMainFragment();
                     return true;
 

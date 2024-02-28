@@ -82,7 +82,7 @@ public class EmojiFragment extends Fragment {
                     showEmojiSelectionPrompt();
                 } else {
                     saveSelectedEmojiToFirestore();
-                    switchToPositiveFragment();
+                    switchToMainFragment();
                 }
             }
         });
@@ -90,6 +90,48 @@ public class EmojiFragment extends Fragment {
 
     private void handleEmojiSelection(String emoji) {
         selectedEmoji = emoji;
+
+        // Reset background for all ImageViews
+        resetBackgrounds();
+
+        // Set background for the selected ImageView
+        ImageView selectedImageView = getCorrespondingImageView(emoji);
+        if (selectedImageView != null) {
+            selectedImageView.setBackgroundResource(R.drawable.select_background);
+        }
+    }
+
+    // Helper method to reset background for all ImageViews
+    private void resetBackgrounds() {
+        ImageView happyEmoji = getView().findViewById(R.id.happyEmoji_fragmentEmoji);
+        ImageView excitedEmoji = getView().findViewById(R.id.excitedEmoji_fragmentEmoji);
+        ImageView normalEmoji = getView().findViewById(R.id.normalEmoji_fragmentEmoji);
+        ImageView sadEmoji = getView().findViewById(R.id.sadEmoji_fragmentEmoji);
+        ImageView angryEmoji = getView().findViewById(R.id.angryEmoji_fragmentEmoji);
+
+        happyEmoji.setBackgroundResource(0);
+        excitedEmoji.setBackgroundResource(0);
+        normalEmoji.setBackgroundResource(0);
+        sadEmoji.setBackgroundResource(0);
+        angryEmoji.setBackgroundResource(0);
+    }
+
+    // Helper method to get the corresponding ImageView for the emoji
+    private ImageView getCorrespondingImageView(String emoji) {
+        switch (emoji) {
+            case "happy":
+                return getView().findViewById(R.id.happyEmoji_fragmentEmoji);
+            case "excited":
+                return getView().findViewById(R.id.excitedEmoji_fragmentEmoji);
+            case "normal":
+                return getView().findViewById(R.id.normalEmoji_fragmentEmoji);
+            case "sad":
+                return getView().findViewById(R.id.sadEmoji_fragmentEmoji);
+            case "angry":
+                return getView().findViewById(R.id.angryEmoji_fragmentEmoji);
+            default:
+                return null;
+        }
     }
 
     private void saveSelectedEmojiToFirestore() {
@@ -97,20 +139,24 @@ public class EmojiFragment extends Fragment {
             emojiViewModel.saveEmojiToFirestore(selectedEmoji, new EmojiViewModel.OnEmojiSaveListener() {
                 @Override
                 public void onEmojiSaveSuccess() {
+                    // Handle successful save
                 }
 
                 @Override
                 public void onEmojiSaveFailure(String errorMessage) {
+                    // Handle save failure
                 }
             });
         } else {
+            // Handle case when selectedEmoji is empty
         }
     }
 
-    private void switchToPositiveFragment() {
-        PositiveFragment positiveFragment = new PositiveFragment();
+
+    private void switchToMainFragment() {
+        MainFragment mainFragment = new MainFragment();
         requireActivity().getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragment_container, positiveFragment)
+                .replace(R.id.fragment_container, mainFragment)
                 .commit();
     }
 

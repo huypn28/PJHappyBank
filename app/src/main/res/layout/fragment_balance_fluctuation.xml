@@ -80,7 +80,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Năm 2024"
+                android:text="Biến động số dư theo tháng"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 ></TextView>

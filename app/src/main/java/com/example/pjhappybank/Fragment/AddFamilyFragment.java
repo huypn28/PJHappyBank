@@ -38,6 +38,7 @@ public class AddFamilyFragment extends Fragment {
         tvCode = view.findViewById(R.id.tv_code_family);
         tvCreate = view.findViewById(R.id.tv_create);
         String random =  generateRandomSixDigitNumber()+"";
+
         tvCode.setText(random);
         tvCreate.setOnClickListener(new View.OnClickListener() {
             @Override

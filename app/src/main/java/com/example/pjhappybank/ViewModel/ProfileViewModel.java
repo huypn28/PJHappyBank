@@ -1,7 +1,6 @@
 package com.example.pjhappybank.ViewModel;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class ProfileViewModel {
@@ -35,15 +34,7 @@ public class ProfileViewModel {
                 });
     }
 
-    public void changePassword(String newPassword, OnPasswordChangeListener listener) {
-        firebaseAuth.getCurrentUser().updatePassword(newPassword)
-                .addOnSuccessListener(aVoid -> {
-                    listener.onPasswordChangeSuccess();
-                })
-                .addOnFailureListener(e -> {
-                    listener.onPasswordChangeFailure(e.getMessage());
-                });
-    }
+
 
 
     public void logout(OnLogoutListener listener) {
@@ -63,10 +54,6 @@ public class ProfileViewModel {
         void onUserInfoFailure(String errorMessage);
     }
 
-    public interface OnPasswordChangeListener {
-        void onPasswordChangeSuccess();
 
-        void onPasswordChangeFailure(String errorMessage);
-    }
 }
 

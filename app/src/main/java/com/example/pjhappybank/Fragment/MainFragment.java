@@ -32,6 +32,7 @@ public class MainFragment extends Fragment {
         ImageView diaryImageView = view.findViewById(R.id.diary_fragment_main);
         ImageView balanceImageView = view.findViewById(R.id.balance_fragment_main);
         ImageView familyFragment = view.findViewById(R.id.family_fragment_main);
+        ImageView checkFragment = view.findViewById(R.id.check_fragment_main);
 
 
         mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
@@ -49,6 +50,12 @@ public class MainFragment extends Fragment {
                 switchToEmojiFragment();
             }
         });
+        checkFragment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switchToPositiveFragment();
+            }
+        });
         balanceImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,6 +66,7 @@ public class MainFragment extends Fragment {
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.menu_profile:
+                    item.setChecked(true);
                     switchToProfileFragment();
                     return true;
 
@@ -82,6 +90,12 @@ public class MainFragment extends Fragment {
         fragmentTransaction.replace(R.id.fragment_container, emojiFragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
+    }
+        private void switchToPositiveFragment() {
+        PositiveFragment positiveFragment = new PositiveFragment();
+        requireActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, positiveFragment)
+                .commit();
     }
     private void switchToBalanceFragment() {
         BalanceFragment balanceFragment = new BalanceFragment();

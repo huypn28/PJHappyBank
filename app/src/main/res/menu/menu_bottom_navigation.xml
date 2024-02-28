@@ -8,7 +8,6 @@
 
     <item
         android:title="Profile"
-        android:checked="true"
         android:id="@+id/menu_profile"
         android:icon="@drawable/ic_person"/>
 

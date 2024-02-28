@@ -48,6 +48,7 @@ public class RegisterViewModel {
         user.put("name", userName);
         user.put("emotion", null);
         user.put("position", null);
+        user.put("familyCode", null);
 
         firestore.collection("users").document(userId)
                 .set(user)
@@ -64,6 +65,9 @@ public class RegisterViewModel {
         String currentDate = new java.text.SimpleDateFormat("dd-MM-yyyy", java.util.Locale.ENGLISH).format(new java.util.Date());
         heartData.put("date", currentDate);
 
+        String currentMonth = new java.text.SimpleDateFormat("MM", java.util.Locale.ENGLISH).format(new java.util.Date());
+        heartData.put("month", currentMonth);
+
         firestore.collection("users").document(userId)
                 .collection("heart").document()
                 .set(heartData)
@@ -72,6 +76,7 @@ public class RegisterViewModel {
                 .addOnFailureListener(e -> {
                 });
     }
+
 
     public interface OnRegisterListener {
         void onRegisterSuccess();
